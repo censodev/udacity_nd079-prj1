@@ -7,12 +7,13 @@ import models.Reservation;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.stream.Collectors;
 
 public class ReservationService {
     private static ReservationService instance;
     private static final Collection<IRoom> rooms = new ArrayList<>();
-    private static final Collection<Reservation> reservations = new ArrayList<>();
+    private static final Collection<Reservation> reservations = new HashSet<>();
 
     private ReservationService() {
     }
