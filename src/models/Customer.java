@@ -1,5 +1,6 @@
 package models;
 
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class Customer {
@@ -40,5 +41,25 @@ public class Customer {
         if (!isValid) {
             throw new IllegalArgumentException("Email is invalid!");
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Customer customer = (Customer) o;
+
+        if (!Objects.equals(firstName, customer.firstName)) return false;
+        if (!Objects.equals(lastName, customer.lastName)) return false;
+        return Objects.equals(email, customer.email);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = firstName != null ? firstName.hashCode() : 0;
+        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        return result;
     }
 }
