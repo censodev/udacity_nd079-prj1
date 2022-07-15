@@ -61,4 +61,8 @@ public class ReservationService {
     public void printAllReservations() {
         reservations.forEach(System.out::println);
     }
+
+    public Collection<IRoom> getAllRooms() {
+        return rooms;
+    }
 }
