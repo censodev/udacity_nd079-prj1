@@ -34,7 +34,19 @@ public class Room implements IRoom {
         return price == 0;
     }
 
-    enum RoomType {
+    public void setRoomNumber(String roomNumber) {
+        this.roomNumber = roomNumber;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public void setRoomType(RoomType roomType) {
+        this.roomType = roomType;
+    }
+
+    public enum RoomType {
         SINGLE,
         DOUBLE,
     }
