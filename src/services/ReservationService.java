@@ -10,8 +10,19 @@ import java.util.Date;
 import java.util.stream.Collectors;
 
 public class ReservationService {
+    private static ReservationService instance;
     private static final Collection<IRoom> rooms = new ArrayList<>();
     private static final Collection<Reservation> reservations = new ArrayList<>();
+
+    private ReservationService() {
+    }
+
+    public static ReservationService getInstance() {
+        if (instance == null) {
+            instance = new ReservationService();
+        }
+        return instance;
+    }
 
     public void addRoom(IRoom room) {
         rooms.add(room);
