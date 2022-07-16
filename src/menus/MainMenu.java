@@ -1,6 +1,5 @@
 package menus;
 
-import api.AdminResource;
 import api.HotelResource;
 
 import java.text.ParseException;
@@ -54,20 +53,33 @@ public class MainMenu implements IMenu {
     }
 
     void findAndReserveARoom() throws ParseException {
-        printAllRooms();
-        System.out.println("Room number: ");
-        var room = hotelResource.getARoom(scanner.nextLine());
-        System.out.println("Customer email: ");
-        var email = scanner.nextLine();
         System.out.println("Check-in date (yyyy/MM/dd): ");
         var checkIn = sdf.parse(scanner.nextLine());
         System.out.println("Check-out date (yyyy/MM/dd): ");
         var checkOut = sdf.parse(scanner.nextLine());
-        hotelResource.bookARoom(email, room, checkIn, checkOut);
-    }
 
-    private void printAllRooms() {
-        AdminResource.getInstance().getAllRooms().forEach(System.out::println);
+        var availableRooms = hotelResource.findARoom(checkIn, checkOut);
+        if (availableRooms.isEmpty()) {
+            System.out.println("Does not find any available rooms");
+            return;
+        }
+        System.out.println("Available rooms:");
+        availableRooms.forEach(System.out::println);
+
+        System.out.println("Select room number: ");
+        var room = hotelResource.getARoom(scanner.nextLine());
+        if (room == null) {
+            System.out.println("Room number does not exist");
+            return;
+        }
+        System.out.println("Customer email: ");
+        var email = scanner.nextLine();
+        try {
+            hotelResource.bookARoom(email, room, checkIn, checkOut);
+            System.out.println("Booking is successful");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     void seeMyReservations() {

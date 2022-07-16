@@ -46,10 +46,14 @@ public class ReservationService {
     }
 
     public Collection<IRoom> findRooms(Date checkInDate, Date checkOutDate) {
-        return reservations.stream()
+        var occupiedRoomNumbers = reservations.stream()
                 .filter(r -> r.getCheckInDate().equals(checkInDate))
                 .filter(r -> r.getCheckOutDate().equals(checkOutDate))
                 .map(Reservation::getRoom)
+                .map(IRoom::getRoomNumber)
+                .collect(Collectors.toList());
+        return rooms.stream()
+                .filter(r -> !occupiedRoomNumbers.contains(r.getRoomNumber()))
                 .collect(Collectors.toList());
     }
 

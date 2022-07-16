@@ -39,8 +39,11 @@ public class HotelResource {
         return reservationService.getARoom(roomNumber);
     }
 
-    public Reservation bookARoom(String customerEmail, IRoom room, Date checkInDate, Date checkOutDate) {
+    public Reservation bookARoom(String customerEmail, IRoom room, Date checkInDate, Date checkOutDate) throws Exception {
         Customer customer = customerService.getCustomer(customerEmail);
+        if (customer == null) {
+            throw new Exception("Email does not exist");
+        }
         return reservationService.reserveARoom(customer, room, checkInDate, checkOutDate);
     }
 
