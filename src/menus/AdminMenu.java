@@ -52,7 +52,7 @@ public class AdminMenu implements IMenu {
         System.out.print("Room number: ");
         room.setRoomNumber(scanner.nextLine());
         System.out.print("Room type (S/D): ");
-        if (scanner.nextLine().equals("S")) {
+        if (scanner.nextLine().equalsIgnoreCase("S")) {
             room.setRoomType(Room.RoomType.SINGLE);
         } else {
             room.setRoomType(Room.RoomType.DOUBLE);

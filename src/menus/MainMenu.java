@@ -72,7 +72,7 @@ public class MainMenu implements IMenu {
             System.out.println("Room number does not exist");
             return;
         }
-        System.out.println("Customer email: ");
+        System.out.println("Enter your email: eg. name@domain.com");
         var email = scanner.nextLine();
         try {
             hotelResource.bookARoom(email, room, checkIn, checkOut);
@@ -93,7 +93,7 @@ public class MainMenu implements IMenu {
         var fn = scanner.nextLine();
         System.out.println("Last name: ");
         var ln = scanner.nextLine();
-        System.out.println("Email: ");
+        System.out.println("Enter your email: eg. name@domain.com");
         var email = scanner.nextLine();
         try {
             hotelResource.createACustomer(email, fn, ln);
