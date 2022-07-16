@@ -4,10 +4,7 @@ import models.Customer;
 import models.IRoom;
 import models.Reservation;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashSet;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class ReservationService {
@@ -77,5 +74,16 @@ public class ReservationService {
 
     Collection<Reservation> getReservationsData() {
         return reservations;
+    }
+
+    public Collection<IRoom> getRecommendedRooms(Date originCheckIn, Date originCheckOut) {
+        var c = Calendar.getInstance();
+        c.setTime(originCheckIn);
+        c.add(Calendar.DATE, 7);
+        var checkIn = c.getTime();
+        c.setTime(originCheckOut);
+        c.add(Calendar.DATE, 7);
+        var checkOut = c.getTime();
+        return findRooms(checkIn, checkOut);
     }
 }

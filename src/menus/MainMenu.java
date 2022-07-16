@@ -60,7 +60,15 @@ public class MainMenu implements IMenu {
 
         var availableRooms = hotelResource.findARoom(checkIn, checkOut);
         if (availableRooms.isEmpty()) {
-            System.out.println("Does not find any available rooms");
+            var recommendedRooms = hotelResource.getRecommendedRooms(checkIn, checkOut);
+            if (recommendedRooms.isEmpty()) {
+                System.out.println("Does not find any available rooms");
+                return;
+            }
+            System.out.println("Does not find any available rooms depend on your expected check-in and check-out date.");
+            System.out.println("Please book room for the alternative dates.");
+            System.out.println("Recommended rooms: (will be available after 7 days)");
+            recommendedRooms.forEach(System.out::println);
             return;
         }
         System.out.println("Available rooms:");
