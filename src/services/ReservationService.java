@@ -70,4 +70,12 @@ public class ReservationService {
     public Collection<IRoom> getAllRooms() {
         return rooms;
     }
+
+    Collection<IRoom> getRoomsData() {
+        return rooms;
+    }
+
+    Collection<Reservation> getReservationsData() {
+        return reservations;
+    }
 }
